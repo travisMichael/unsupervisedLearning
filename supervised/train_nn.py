@@ -35,15 +35,15 @@ def train_neural_net_with_loan_data(path, with_plots):
         #     ['HLS = 20 x 5', 'HLS = 50 x 5', 'HLS = 100 x 5', 'HLS = 500 x 5']
         # )
 
-        plt.title("Neural Network with Varying Hidden Layer Size (HLS) \n Learning Curves")
-        plt.xlabel("Training examples")
-        plt.ylabel("F1 Score")
-        plt.grid()
-
-        plt.legend(loc="best")
-        # plt.show()
-        save_figure(plt, path + "plot/" + data_set, 'neural_net_learning_curves.png')
-        print("done")
+        # plt.title("Neural Network with Varying Hidden Layer Size (HLS) \n Learning Curves")
+        # plt.xlabel("Training examples")
+        # plt.ylabel("F1 Score")
+        # plt.grid()
+        #
+        # plt.legend(loc="best")
+        # # plt.show()
+        # save_figure(plt, path + "plot/" + data_set, 'neural_net_learning_curves.png')
+        # print("done")
 
 
 if __name__ == "__main__":
