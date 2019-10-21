@@ -9,72 +9,34 @@ from sklearn.metrics.cluster import homogeneity_score
 
 # https://scikit-learn.org/stable/auto_examples/cluster/plot_kmeans_digits.html
 def run_k_means_on_loan_data(path):
-    data_set = 'loan'
+    data_set = 'cardio'
     x_train, y_train = load_data(path + 'data/' + data_set + '/train/')
     # X, y = load_data(path + 'data/' + data_set + '/train/')
 
-    estimator = KMeans(n_clusters=3, random_state=0)
+    estimator = KMeans(n_clusters=15, random_state=0)
     estimator.fit(x_train)
 
-    predictions = estimator.predict(x_train)
+    p = estimator.predict(x_train)
 
-    print("%.6f" % homogeneity_score(y_train, predictions))
+    for i in range(15):
+        print(str(i) + " " + str(len(p[p==i])))
+
+    print("%.6f" % homogeneity_score(y_train, p))
 
     centers = estimator.cluster_centers_
 
-    zeros = np.zeros(x_train.shape)
-    for i in range(len(x_train)):
-        zeros[i] = (centers[0] - x_train[i]) ** 2
-
-    zeros_1 = np.zeros(x_train.shape)
-    for i in range(len(x_train)):
-        zeros_1[i] = (centers[1] - x_train[i]) ** 2
-
-    # d_1 = (centers[0][0] - x_train[0][0]) ** 2 + (centers[0][1] - x_train[0][1]) ** 2
-
-    d = zeros + zeros_1
-
-    d = np.sqrt(d)
-
-    d_0 = d[predictions[predictions==0].ravel()]
-    d_1 = d[predictions[predictions==1].ravel()]
-    d_2 = d[predictions[predictions==2].ravel()]
-
-    d = d.T
-
-    d = np.sum(d , axis=1)
-
-    sort_args = np.argsort(d)
-
-    plt.scatter(x_train[:,92], x_train[:,93], alpha=.1, color='black')
-    plt.xlabel('PCA 1')
-    plt.ylabel('PCA 2')
-    plt.ylim((-1.0, 1.0))
-    plt.show()
-    #
-    # plt.scatter(x_train[:,10], x_train[:,11], alpha=.1, color='black')
-    # plt.xlabel('PCA 1')
-    # plt.ylabel('PCA 2')
-    # plt.ylim((-1.0, 1.0))
-    # plt.show()
-
-    plt.scatter(x_train[:,3], x_train[:,4], alpha=.1, color='black')
-    plt.xlabel('PCA 1')
-    plt.ylabel('PCA 2')
-    plt.ylim((-1.0, 3.0))
+    plt.scatter(x_train[:,2][p==0].ravel(), x_train[:,3][p==0].ravel(), alpha=.1, color='red')
+    plt.scatter(x_train[:,2][p==13].ravel(), x_train[:,3][p==13].ravel(), alpha=.1, color='blue')
+    # plt.scatter(x_train[:,2][p==2].ravel(), x_train[:,3][p==2].ravel(), alpha=.1, color='green')
+    plt.scatter(x_train[:,2][p==14].ravel(), x_train[:,3][p==14].ravel(), alpha=.1, color='yellow')
+    plt.scatter(x_train[:,2][p==2].ravel(), x_train[:,3][p==2].ravel(), alpha=.1, color='green')
+    plt.xlabel('Patient Height')
+    plt.ylabel('Patient Weight')
+    # plt.ylim((0.0, 1.0))
     plt.show()
 
-    # plt.scatter(x_train[:,2], x_train[:,3], alpha=.1, color='black')
-    # plt.xlabel('PCA 1')
-    # plt.ylabel('PCA 2')
-    # plt.ylim((-1.0, 1.0))
-    # plt.show()
-
-    plt.scatter(x_train[:,1], x_train[:,2], alpha=.1, color='black')
-    plt.xlabel('PCA 1')
-    plt.ylabel('PCA 2')
-    plt.ylim((-1.0, 1.0))
-    plt.show()
+    plt.xlabel('Patient Height')
+    plt.ylabel('Patient Weight')
 
     print(centers)
 

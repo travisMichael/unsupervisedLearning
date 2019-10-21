@@ -2,11 +2,19 @@ import matplotlib.pyplot as plt
 
 
 def run(path):
-    k, i, s = load_cluster_stats("loan_stats.txt")
+    k, i, s = load_cluster_stats("cardiovascular_stats.txt")
+    k_2, i_2, s_2 = load_cluster_stats("cardiovascular_pca_stats.txt")
+    k_3, i_3, s_3 = load_cluster_stats("cardiovascular_ica_stats.txt")
 
+    # plt = plot_multiple(
+    #     [k, k_2],
+    #     [i, i_2],
+    #     ["r", "b", "m", "g"],
+    #     ["model 1", "model 2", "model 3", "model 4"]
+    # )
     plt = plot_multiple(
-        k,
-        i,
+        [k, k_2, k_3],
+        [s, s_2, s_3],
         ["r", "b", "m", "g"],
         ["model 1", "model 2", "model 3", "model 4"]
     )
@@ -19,10 +27,18 @@ def run(path):
     print('hello')
 
 
-def plot_multiple(x, y, color_list, label_list):
+def plot_single(x, y, color_list, label_list):
     plt.figure()
     # plt.legend(loc="best")
     plt.plot(x, y, '-o', color='black', label='dd')
+    return plt
+
+
+def plot_multiple(x, y, color_list, label_list):
+    plt.figure()
+    plt.legend(loc="best")
+    for i in range(len(x)):
+        plt.plot(x[i], y[i], '-o', color=color_list[i], label=label_list[i])
     return plt
 
 
