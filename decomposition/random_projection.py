@@ -3,6 +3,8 @@ from sklearn.neural_network import MLPClassifier
 from utils import load_data
 from sklearn.cluster import KMeans
 from sklearn.metrics import accuracy_score
+from sklearn.metrics import mean_squared_error
+import numpy as np
 
 
 # https://scikit-learn.org/stable/modules/generated/sklearn.random_projection.GaussianRandomProjection.html
@@ -14,12 +16,10 @@ def run(path, with_plots):
     pca = GaussianRandomProjection(n_components=2)
     pca_x_train = pca.fit_transform(x_train)
     # Plot the explained variances
-    features = range(pca.n_components_)
-    # plt.bar(features, pca.explained_variance_ratio_, color='black')
-    # plt.xlabel('PCA features')
-    # plt.ylabel('variance %')
-    # plt.xticks(features)
-    # plt.show()
+    p_inverse = np.linalg.pinv(pca.components_)
+
+    original_x = np.matmul(pca_x_train, p_inverse.T)
+    e = mean_squared_error(x_train, original_x)
 
     # pca_x_train = pca.transform(x_train)
     pca_x = pca.transform(X)

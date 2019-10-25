@@ -63,6 +63,33 @@ def run_k_means_on_pca_cardiovascular_data(path):
     f.close()
 
 
+def run_k_means_on_random_projections_cardiovascular_data(path):
+    data_set = 'cardio'
+    x_train, y_train = load_data(path + 'data/' + data_set + '/train/')
+    # X, y = load_data(path + 'data/' + data_set + '/train/')
+
+    pca = GaussianRandomProjection(n_components=5)
+    pca_x_train = pca.fit_transform(x_train)
+
+    f = open("cardiovascular_random_projections_stats.txt","w+")
+
+    bench_k_means("1", pca_x_train, y_train, 1, f, 1)
+    bench_k_means("2", pca_x_train, y_train, 2, f, 1)
+    bench_k_means("3", pca_x_train, y_train, 3, f, 1)
+    bench_k_means("4", pca_x_train, y_train, 4, f, 1)
+    bench_k_means("5", pca_x_train, y_train, 5, f, 1)
+    bench_k_means("6", pca_x_train, y_train, 6, f, 1)
+    bench_k_means("7", pca_x_train, y_train, 7, f, 1)
+    bench_k_means("8", pca_x_train, y_train, 8, f, 1)
+    bench_k_means("9", pca_x_train, y_train, 9, f, 1)
+    bench_k_means("10", pca_x_train, y_train, 10, f, 1)
+    bench_k_means("11", pca_x_train, y_train, 11, f, 1)
+    bench_k_means("12", pca_x_train, y_train, 12, f, 1)
+    bench_k_means("13", pca_x_train, y_train, 13, f, 1)
+    bench_k_means("14", pca_x_train, y_train, 14, f, 1)
+    bench_k_means("15", pca_x_train, y_train, 15, f, 1)
+    f.close()
+
 def run_k_means_on_ica_cardiovascular_data(path):
     data_set = 'cardio'
     x_train, y_train = load_data(path + 'data/' + data_set + '/train/')
@@ -128,5 +155,6 @@ def bench_k_means(name, data, labels, k, f, iterations):
 if __name__ == "__main__":
     # train_neural_net('../', False)
     # run_k_means_on_pca_cardiovascular_data('../../')
-    run_k_means_on_ica_cardiovascular_data('../../')
+    run_k_means_on_random_projections_cardiovascular_data('../../')
+    # run_k_means_on_ica_cardiovascular_data('../../')
     # run_k_means_on_cardiovascular_data('../../')

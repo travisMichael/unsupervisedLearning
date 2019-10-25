@@ -5,6 +5,7 @@ def run(path):
     k, i, s = load_cluster_stats("cardiovascular_stats.txt")
     k_2, i_2, s_2 = load_cluster_stats("cardiovascular_pca_stats.txt")
     k_3, i_3, s_3 = load_cluster_stats("cardiovascular_ica_stats.txt")
+    k_4, i_4, s_4 = load_cluster_stats("cardiovascular_random_projections_stats.txt")
 
     # plt = plot_multiple(
     #     [k, k_2],
@@ -13,8 +14,8 @@ def run(path):
     #     ["model 1", "model 2", "model 3", "model 4"]
     # )
     plt = plot_multiple(
-        [k, k_2, k_3],
-        [s, s_2, s_3],
+        [k, k_2, k_3, k_4],
+        [s, s_2, s_3, s_4],
         ["r", "b", "m", "g"],
         ["model 1", "model 2", "model 3", "model 4"]
     )
