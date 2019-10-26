@@ -15,7 +15,7 @@ def generate_cardio_elbow_plot(path):
     plt.title('K Means - Cardiovascular Dataset')
     # plt.legend()
     # plt.show()
-    plt.savefig("cardio_elbow_plot.png")
+    plt.savefig("plots/cardio_elbow_plot.png")
 
 
 def generate_loan_elbow_plot(path):
@@ -32,8 +32,7 @@ def generate_loan_elbow_plot(path):
     plt.title('K Means - Financial Loan Dataset')
     # plt.legend()
     # plt.show()
-    plt.savefig("loan_elbow_plot.png")
-
+    plt.savefig("plots/loan_elbow_plot.png")
 
 
 def plot_single(x, y, color_list, label_list):

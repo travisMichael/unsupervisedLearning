@@ -9,6 +9,7 @@ from sklearn.metrics.cluster import homogeneity_score
 from sklearn.metrics import mean_squared_error
 from time import time
 from _heapq import heappush, heappop
+from decomposition.decomp_util import reconstruct, time_estimator
 
 
 def pca_cardio_scatter_plot(path):
@@ -78,33 +79,64 @@ def run_stats(path):
     data_set = 'loan'
     x_train, y_train = load_data(path + 'data/' + data_set + '/train/')
 
-    f = open("pca_runtime_stats.txt","w+")
+    f = open("pca_loan_runtime_stats.txt","w+")
 
-    run(1, f, x_train)
-    run(2, f, x_train)
-    run(3, f, x_train)
-    run(4, f, x_train)
-    run(5, f, x_train)
-    run(6, f, x_train)
-    run(8, f, x_train)
-    run(9, f, x_train)
-    run(10, f, x_train)
+    time_estimator(PCA(n_components=1), f, x_train)
+    time_estimator(PCA(n_components=2), f, x_train)
+    time_estimator(PCA(n_components=3), f, x_train)
+    time_estimator(PCA(n_components=4), f, x_train)
+    time_estimator(PCA(n_components=5), f, x_train)
+    time_estimator(PCA(n_components=6), f, x_train)
+    time_estimator(PCA(n_components=7), f, x_train)
+    time_estimator(PCA(n_components=8), f, x_train)
+    time_estimator(PCA(n_components=9), f, x_train)
+    time_estimator(PCA(n_components=10), f, x_train)
 
     f.close()
 
 
-def run(n, f, train):
-    t = 0.0
-    a = 20
-    for i in range(a):
-        start = time()
-        ica = PCA(n_components=n)
-        ica.fit_transform(train)
-        t += time() - start
-    f.write("%.3f\t%.3f\t%.3f\n" % (1, t/a , 0.0))
+def generate_loan_pca_reconstruction_stats(path):
+    data_set = 'loan'
+    x_train, y_train = load_data(path + 'data/' + data_set + '/train/')
+
+    f = open("pca_loan_reconstruction_stats.txt","w+")
+
+    reconstruct(PCA(n_components=1), f, x_train)
+    reconstruct(PCA(n_components=2), f, x_train)
+    reconstruct(PCA(n_components=3), f, x_train)
+    reconstruct(PCA(n_components=4), f, x_train)
+    reconstruct(PCA(n_components=5), f, x_train)
+    reconstruct(PCA(n_components=6), f, x_train)
+    reconstruct(PCA(n_components=7), f, x_train)
+    reconstruct(PCA(n_components=8), f, x_train)
+    reconstruct(PCA(n_components=9), f, x_train)
+    reconstruct(PCA(n_components=10), f, x_train)
+
+    f.close()
+
+
+def generate_cardio_pca_reconstruction_stats(path):
+    data_set = 'cardio'
+    x_train, y_train = load_data(path + 'data/' + data_set + '/train/')
+
+    f = open("pca_cardio_reconstruction_stats.txt","w+")
+
+    reconstruct(PCA(n_components=1), f, x_train)
+    reconstruct(PCA(n_components=2), f, x_train)
+    reconstruct(PCA(n_components=3), f, x_train)
+    reconstruct(PCA(n_components=4), f, x_train)
+    reconstruct(PCA(n_components=5), f, x_train)
+    reconstruct(PCA(n_components=6), f, x_train)
+    reconstruct(PCA(n_components=7), f, x_train)
+    reconstruct(PCA(n_components=8), f, x_train)
+    reconstruct(PCA(n_components=9), f, x_train)
+    reconstruct(PCA(n_components=10), f, x_train)
+
+    f.close()
 
 
 if __name__ == "__main__":
-    # run_stats('../')
+    generate_cardio_pca_reconstruction_stats('../')
+    # generate_loan_reconstruction_stats('../')
     # pca_cardio_scatter_plot('../')
-    pca_loan_scatter_plot('../')
+    # pca_loan_scatter_plot('../')
