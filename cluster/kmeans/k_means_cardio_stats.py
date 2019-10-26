@@ -90,6 +90,7 @@ def run_k_means_on_random_projections_cardiovascular_data(path):
     bench_k_means("15", pca_x_train, y_train, 15, f, 1)
     f.close()
 
+
 def run_k_means_on_ica_cardiovascular_data(path):
     data_set = 'cardio'
     x_train, y_train = load_data(path + 'data/' + data_set + '/train/')

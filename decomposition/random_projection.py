@@ -5,6 +5,7 @@ from sklearn.cluster import KMeans
 from sklearn.metrics import accuracy_score
 from sklearn.metrics import mean_squared_error
 import numpy as np
+import matplotlib.pyplot as plt
 
 
 # https://scikit-learn.org/stable/modules/generated/sklearn.random_projection.GaussianRandomProjection.html
@@ -13,33 +14,19 @@ def run(path, with_plots):
     x_train, y_train = load_data(path + 'data/' + data_set + '/train/')
     X, y = load_data(path + 'data/' + data_set + '/train/')
 
-    pca = GaussianRandomProjection(n_components=2)
-    pca_x_train = pca.fit_transform(x_train)
-    # Plot the explained variances
-    p_inverse = np.linalg.pinv(pca.components_)
+    grp = GaussianRandomProjection(n_components=2)
+    grp_x_train = grp.fit_transform(x_train)
 
-    original_x = np.matmul(pca_x_train, p_inverse.T)
-    e = mean_squared_error(x_train, original_x)
-
-    # pca_x_train = pca.transform(x_train)
-    pca_x = pca.transform(X)
-
-    kmeans = KMeans(n_clusters=4, random_state=0).fit(pca_x_train)
+    kmeans = KMeans(n_clusters=10, random_state=0).fit(grp_x_train)
     print(kmeans.labels_)
-    results = kmeans.predict(pca_x)
+    p = kmeans.predict(grp_x_train)
 
-    model = MLPClassifier(solver='sgd', validation_fraction=0.0, alpha=1e-1, hidden_layer_sizes=(3, 3), random_state=1).fit(pca_x_train, y_train)
-    #
-    results = model.predict(pca_x)
-    print(accuracy_score(y_train, results))
-
-    # plt.scatter(principalComponents[0], principalComponents[1], alpha=.1, color='black')
-    # plt.xlabel('PCA 1')
-    # plt.ylabel('PCA 2')
-    # plt.show()
-
-    # print(class_1, total)
-    # print(x_train.shape)
+    plt.scatter(grp_x_train[:, 0][p==0].ravel(), grp_x_train[:,1][p==0].ravel(), alpha=.1, color='yellow')
+    plt.scatter(grp_x_train[:, 0][p==6].ravel(), grp_x_train[:,1][p==6].ravel(), alpha=.1, color='orange')
+    plt.scatter(grp_x_train[:, 0][p==2].ravel(), grp_x_train[:,1][p==2].ravel(), alpha=.1, color='blue')
+    plt.xlabel('PCA 1')
+    plt.ylabel('PCA 2')
+    plt.show()
 
 
 if __name__ == "__main__":

@@ -11,43 +11,20 @@ from sklearn.metrics.cluster import homogeneity_score
 def run(path, with_plots):
     data_set = 'cardio'
     x_train, y_train = load_data(path + 'data/' + data_set + '/train/')
-    X, y = load_data(path + 'data/' + data_set + '/train/')
 
-    pca = LDA(n_components=5)
-    pca_x_train = pca.fit_transform(x_train)
-    # Plot the explained variances
-    features = range(pca.n_components_)
-    # plt.bar(features, pca.explained_variance_ratio_, color='black')
-    # plt.xlabel('PCA features')
-    # plt.ylabel('variance %')
-    # plt.xticks(features)
-    # plt.show()
+    lda = LDA(n_components=5)
+    lda_x_train = lda.fit_transform(x_train)
 
-    # pca_x_train = pca.transform(x_train)
-    # pca_x = pca.transform(X)
-
-
-    kmeans = KMeans(n_clusters=10, random_state=0).fit(pca_x_train)
+    kmeans = KMeans(n_clusters=10, random_state=0).fit(lda_x_train)
     print(kmeans.labels_)
-    p = kmeans.predict(pca_x_train)
+    p = kmeans.predict(lda_x_train)
 
-    kmeans = KMeans(n_clusters=10, random_state=0).fit(x_train)
-    print(kmeans.labels_)
-    p_2 = kmeans.predict(x_train)
-
-    for i in range(15):
-        print(str(i) + " " + str(len(p[p==i])))
-
-    print("%.6f" % homogeneity_score(p_2, p))
-
-
-
-
-    print("")
-
-
-    # print(class_1, total)
-    # print(x_train.shape)
+    plt.scatter(lda_x_train[:, 0][p==0].ravel(), lda_x_train[:,1][p==0].ravel(), alpha=.1, color='yellow')
+    plt.scatter(lda_x_train[:, 0][p==6].ravel(), lda_x_train[:,1][p==6].ravel(), alpha=.1, color='orange')
+    plt.scatter(lda_x_train[:, 0][p==2].ravel(), lda_x_train[:,1][p==2].ravel(), alpha=.1, color='blue')
+    plt.xlabel('PCA 1')
+    plt.ylabel('PCA 2')
+    plt.show()
 
 
 if __name__ == "__main__":

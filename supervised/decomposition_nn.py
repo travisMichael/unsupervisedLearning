@@ -26,6 +26,7 @@ def train_neural_net_with_pca_loan_data(path, with_plots):
         write_learning_curve_stats(model_1, pca_x_train, y_train, f)
         f.close()
 
+
 if __name__ == "__main__":
     # train_neural_net('../', False)
 

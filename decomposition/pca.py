@@ -7,9 +7,9 @@ from utils import load_data
 from sklearn.cluster import KMeans
 from sklearn.metrics.cluster import homogeneity_score
 from sklearn.metrics import mean_squared_error
+from time import time
 
-
-def run(path, with_plots):
+def run_scatter(path, with_plots):
     data_set = 'cardio'
     x_train, y_train = load_data(path + 'data/' + data_set + '/train/')
     X, y = load_data(path + 'data/' + data_set + '/train/')
@@ -63,7 +63,35 @@ def run(path, with_plots):
     # print(class_1, total)
     # print(x_train.shape)
 
+def run_stats(path):
+    data_set = 'loan'
+    x_train, y_train = load_data(path + 'data/' + data_set + '/train/')
+
+    f = open("pca_runtime_stats.txt","w+")
+
+    run(1, f, x_train)
+    run(2, f, x_train)
+    run(3, f, x_train)
+    run(4, f, x_train)
+    run(5, f, x_train)
+    run(6, f, x_train)
+    run(8, f, x_train)
+    run(9, f, x_train)
+    run(10, f, x_train)
+
+    f.close()
+
+
+def run(n, f, train):
+    t = 0.0
+    a = 20
+    for i in range(a):
+        start = time()
+        ica = PCA(n_components=n)
+        ica.fit_transform(train)
+        t += time() - start
+    f.write("%.3f\t%.3f\t%.3f\n" % (1, t/a , 0.0))
+
 
 if __name__ == "__main__":
-    # train_neural_net('../', False)
-    run('../', "False")
+    run_stats('../')
