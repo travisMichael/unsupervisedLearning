@@ -6,28 +6,75 @@ from utils import load_data
 from sklearn.cluster import KMeans
 from sklearn.datasets import load_digits
 from time import time
+from _heapq import heappush, heappop
 
 
-def run_scatter_plot(path, with_plots):
+def ica_cardio_scatter_plot(path):
 
-    data_set = 'loan'
+    data_set = 'cardio'
     x_train, y_train = load_data(path + 'data/' + data_set + '/train/')
 
-    ica = FastICA(n_components=5)
+    ica = FastICA(n_components=4)
     ica.fit_transform(x_train)
 
     ica_x_train = ica.transform(x_train)
 
     kmeans = KMeans(n_clusters=10, random_state=0).fit(ica_x_train)
     print(kmeans.labels_)
+
     p = kmeans.predict(ica_x_train)
 
+    for i in range(15):
+        print(str(i) + " " + str(len(p[p==i])))
+
     plt.scatter(ica_x_train[:, 0][p==0].ravel(), ica_x_train[:,1][p==0].ravel(), alpha=.1, color='yellow')
-    plt.scatter(ica_x_train[:, 0][p==6].ravel(), ica_x_train[:,1][p==6].ravel(), alpha=.1, color='orange')
-    plt.scatter(ica_x_train[:, 0][p==2].ravel(), ica_x_train[:,1][p==2].ravel(), alpha=.1, color='blue')
-    plt.xlabel('PCA 1')
-    plt.ylabel('PCA 2')
-    plt.show()
+    plt.scatter(ica_x_train[:, 0][p==1].ravel(), ica_x_train[:,1][p==1].ravel(), alpha=.1, color='orange')
+    plt.scatter(ica_x_train[:, 0][p==7].ravel(), ica_x_train[:,1][p==7].ravel(), alpha=.1, color='blue')
+    plt.scatter(ica_x_train[:, 0][p==9].ravel(), ica_x_train[:,1][p==9].ravel(), alpha=.1, color='red')
+    plt.xlabel('ICA Component 1')
+    plt.ylabel('ICA Component 2')
+    plt.title('Cardiovascular Data Representation after ICA')
+    # plt.show()
+    plt.savefig("plots/ica_cardio.png")
+
+    print(x_train.shape)
+
+
+def ica_loan_scatter_plot(path):
+
+    data_set = 'loan'
+    x_train, y_train = load_data(path + 'data/' + data_set + '/train/')
+
+    ica = FastICA(n_components=2)
+    ica.fit_transform(x_train)
+
+    ica_x_train = ica.transform(x_train)
+
+    kmeans = KMeans(n_clusters=10, random_state=0).fit(ica_x_train)
+    print(kmeans.labels_)
+
+    p = kmeans.predict(ica_x_train)
+
+    for i in range(15):
+        print(str(i) + " " + str(len(p[p==i])))
+
+    h = []
+    for i in range(15):
+        heappush(h, (-1 * len(p[p==i]), i))
+        print(str(i) + " " + str(len(p[p==i])))
+
+    index = heappop(h)[1]
+    plt.scatter(ica_x_train[:, 0][p==index].ravel(), ica_x_train[:,1][p==index].ravel(), alpha=.1, color='red')
+    index = heappop(h)[1]
+    plt.scatter(ica_x_train[:, 0][p==index].ravel(), ica_x_train[:,1][p==index].ravel(), alpha=.1, color='orange')
+    index = heappop(h)[1]
+    plt.scatter(ica_x_train[:, 0][p==index].ravel(), ica_x_train[:,1][p==index].ravel(), alpha=.1, color='blue')
+
+    plt.xlabel('ICA Component 1')
+    plt.ylabel('ICA Component 2')
+    plt.title('Financial Loan Data Representation after ICA')
+    # plt.show()
+    plt.savefig("plots/ica_loan.png")
 
     print(x_train.shape)
 
@@ -63,5 +110,6 @@ def run(n, f, train):
 
 
 if __name__ == "__main__":
-    run_stats('../')
-    # run_scatter_plot('../', "False")
+    # run_stats('../')
+    # ica_cardio_scatter_plot('../')
+    ica_loan_scatter_plot('../')
