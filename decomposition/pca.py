@@ -135,8 +135,30 @@ def generate_cardio_pca_reconstruction_stats(path):
     f.close()
 
 
+def generate_pca_variance(path):
+    data_set = 'loan'
+    x_train, y_train = load_data(path + 'data/' + data_set + '/train/')
+
+    pca = PCA(n_components=10)
+    pca_x_train = pca.fit_transform(x_train)
+
+    # plt.hist(pca.explained_variance_, 5, facecolor='black', alpha=0.5)
+
+    features = range(pca.n_components_)
+    plt.show()
+    plt.bar(features, pca.explained_variance_ratio_, color='black')
+    plt.xlabel('PCA features')
+    plt.ylabel('variance %')
+    plt.xticks(features)
+    plt.title('PCA - Explained Variance Ratio for \nFinancial Loan Dataset (Standard)')
+    # plt.show()
+    plt.savefig("plots/pca_variance_loan_standard.png")
+    print()
+
+
 if __name__ == "__main__":
-    generate_cardio_pca_reconstruction_stats('../')
+    generate_pca_variance('../')
+    # generate_cardio_pca_reconstruction_stats('../')
     # generate_loan_reconstruction_stats('../')
     # pca_cardio_scatter_plot('../')
     # pca_loan_scatter_plot('../')
