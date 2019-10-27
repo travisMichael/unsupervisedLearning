@@ -3,7 +3,7 @@ from cluster.kmeans.cluster_plot import generate_cardio_elbow_plot, generate_loa
 from decomposition.pca import pca_cardio_scatter_plot, pca_loan_scatter_plot
 from decomposition.ica import ica_cardio_scatter_plot, ica_loan_scatter_plot
 from decomposition.random_projection import grp_cardio_scatter_plot, grp_loan_scatter_plot
-from decomposition.fa import fa_cardio_scatter_plot, fa_loan_scatter_plot
+from decomposition.svd import fa_cardio_scatter_plot, fa_loan_scatter_plot
 
 
 if __name__ == "__main__":

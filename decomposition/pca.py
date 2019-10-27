@@ -75,11 +75,10 @@ def pca_loan_scatter_plot(path):
     plt.savefig("plots/pca_loan.png")
 
 
-def run_stats(path):
-    data_set = 'loan'
+def pca_runtime_stats(path, data_set):
     x_train, y_train = load_data(path + 'data/' + data_set + '/train/')
 
-    f = open("pca_loan_runtime_stats.txt","w+")
+    f = open("stats/pca_" + data_set + "_runtime_stats.txt","w+")
 
     time_estimator(PCA(n_components=1), f, x_train)
     time_estimator(PCA(n_components=2), f, x_train)
@@ -157,7 +156,8 @@ def generate_pca_variance(path):
 
 
 if __name__ == "__main__":
-    generate_pca_variance('../')
+    pca_runtime_stats('../', 'cardio')
+    # generate_pca_variance('../')
     # generate_cardio_pca_reconstruction_stats('../')
     # generate_loan_reconstruction_stats('../')
     # pca_cardio_scatter_plot('../')

@@ -77,42 +77,23 @@ def ica_loan_scatter_plot(path):
     print(x_train.shape)
 
 
-def run_stats(path):
-    data_set = 'loan'
+def ica_runtime_stats(path, data_set):
     x_train, y_train = load_data(path + 'data/' + data_set + '/train/')
 
-    f = open("ica_loan_runtime_stats.txt","w+")
+    f = open("stats/pca_" + data_set + "_runtime_stats.txt","w+")
 
-    run(1, f, x_train)
-    print("..")
-    run(2, f, x_train)
-    print("..")
-    run(3, f, x_train)
-    print("..")
-    run(4, f, x_train)
-    print("..")
-    run(5, f, x_train)
-    print("..")
-    run(6, f, x_train)
-    print("..")
-    run(8, f, x_train)
-    print("..")
-    run(9, f, x_train)
-    print("..")
-    run(10, f, x_train)
+    time_estimator(FastICA(n_components=1), f, x_train)
+    time_estimator(FastICA(n_components=2), f, x_train)
+    time_estimator(FastICA(n_components=3), f, x_train)
+    time_estimator(FastICA(n_components=4), f, x_train)
+    time_estimator(FastICA(n_components=5), f, x_train)
+    time_estimator(FastICA(n_components=6), f, x_train)
+    time_estimator(FastICA(n_components=7), f, x_train)
+    time_estimator(FastICA(n_components=8), f, x_train)
+    time_estimator(FastICA(n_components=9), f, x_train)
+    time_estimator(FastICA(n_components=10), f, x_train)
 
     f.close()
-
-
-def run(n, f, train):
-    t = 0.0
-    a = 50
-    for i in range(a):
-        start = time()
-        ica = FastICA(n_components=n)
-        ica.fit_transform(train)
-        t += time() - start
-    f.write("%.3f\t%.3f\t%.3f\n" % (1, t/a , 0.0))
 
 
 def generate_loan_ica_reconstruction_stats(path):
@@ -156,7 +137,8 @@ def generate_cardio_ica_reconstruction_stats(path):
 
 
 if __name__ == "__main__":
-    generate_cardio_ica_reconstruction_stats('../')
+    ica_runtime_stats('../', 'cardio')
+    # generate_cardio_ica_reconstruction_stats('../')
     # generate_loan_ica_reconstruction_stats('../')
     # run_stats('../')
     # ica_cardio_scatter_plot('../')

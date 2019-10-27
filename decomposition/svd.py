@@ -120,8 +120,28 @@ def generate_cardio_svd_reconstruction_stats(path):
     f.close()
 
 
+def svd_runtime_stats(path, data_set):
+    x_train, y_train = load_data(path + 'data/' + data_set + '/train/')
+
+    f = open("stats/svd_" + data_set + "_runtime_stats.txt","w+")
+
+    time_estimator(TruncatedSVD(n_components=1), f, x_train)
+    time_estimator(TruncatedSVD(n_components=2), f, x_train)
+    time_estimator(TruncatedSVD(n_components=3), f, x_train)
+    time_estimator(TruncatedSVD(n_components=4), f, x_train)
+    time_estimator(TruncatedSVD(n_components=5), f, x_train)
+    time_estimator(TruncatedSVD(n_components=6), f, x_train)
+    time_estimator(TruncatedSVD(n_components=7), f, x_train)
+    time_estimator(TruncatedSVD(n_components=8), f, x_train)
+    time_estimator(TruncatedSVD(n_components=9), f, x_train)
+    time_estimator(TruncatedSVD(n_components=10), f, x_train)
+
+    f.close()
+
+
 if __name__ == "__main__":
-    generate_loan_svd_reconstruction_stats('../')
-    generate_cardio_svd_reconstruction_stats('../')
+    svd_runtime_stats('../', 'loan')
+    # generate_loan_svd_reconstruction_stats('../')
+    # generate_cardio_svd_reconstruction_stats('../')
     # fa_cardio_scatter_plot('../')
     # fa_loan_scatter_plot('../')
