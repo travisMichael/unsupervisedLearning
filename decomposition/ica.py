@@ -80,7 +80,7 @@ def ica_loan_scatter_plot(path):
 def ica_runtime_stats(path, data_set):
     x_train, y_train = load_data(path + 'data/' + data_set + '/train/')
 
-    f = open("stats/pca_" + data_set + "_runtime_stats.txt","w+")
+    f = open("stats/ica_" + data_set + "_runtime_stats.txt","w+")
 
     time_estimator(FastICA(n_components=1), f, x_train)
     time_estimator(FastICA(n_components=2), f, x_train)
