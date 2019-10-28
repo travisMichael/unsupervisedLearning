@@ -15,7 +15,7 @@ def grp_cardio_scatter_plot(path):
     data_set = 'cardio'
     x_train, y_train = load_data(path + 'data/' + data_set + '/train/')
 
-    grp = GaussianRandomProjection(n_components=2)
+    grp = GaussianRandomProjection(n_components=3)
     grp_x_train = grp.fit_transform(x_train)
 
     kmeans = KMeans(n_clusters=10, random_state=0).fit(grp_x_train)

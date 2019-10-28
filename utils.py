@@ -49,12 +49,14 @@ def train_and_time(model, X, y):
 
 
 # np.linspace(.1, 1.0, 10)
-def write_learning_curve_stats(model, x, y, f):
+def write_learning_curve_stats(model, x, y, f, sample_size_list):
 
     cv = ShuffleSplit(n_splits=10, test_size=0.2, random_state=0)
     print("Generating learning curve for model: ")
     start_time = time.time()
-    train_sizes, train_scores, test_scores = learning_curve(model, x, y, cv=cv, train_sizes=[5, 10, 15, 20, 50, 100, 10000], scoring='accuracy')
+    if sample_size_list is None:
+        sample_size_list = [5, 10, 15, 20, 50, 100, 10000]
+    train_sizes, train_scores, test_scores = learning_curve(model, x, y, cv=cv, train_sizes=sample_size_list, scoring='accuracy')
 
     train_scores_mean = np.mean(train_scores, axis=1)
     # train_scores_std = np.std(train_scores, axis=1)

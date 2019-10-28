@@ -4,6 +4,7 @@ from decomposition.pca import pca_cardio_scatter_plot, pca_loan_scatter_plot
 from decomposition.ica import ica_cardio_scatter_plot, ica_loan_scatter_plot
 from decomposition.random_projection import grp_cardio_scatter_plot, grp_loan_scatter_plot
 from decomposition.svd import fa_cardio_scatter_plot, fa_loan_scatter_plot
+from cluster.kmeans.k_means_cardio_visualizations import run_k_means_on_cardio_data, run_k_means_on_loan_data
 
 
 if __name__ == "__main__":
@@ -24,3 +25,6 @@ if __name__ == "__main__":
             grp_loan_scatter_plot('')
             fa_cardio_scatter_plot('')
             fa_loan_scatter_plot('')
+        elif plot == 'components':
+            run_k_means_on_cardio_data('')
+            run_k_means_on_loan_data('')
