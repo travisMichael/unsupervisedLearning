@@ -1,4 +1,4 @@
-from sklearn.decomposition import TruncatedSVD
+from sklearn.random_projection import GaussianRandomProjection
 from utils import load_data
 from sklearn.cluster import KMeans
 from sklearn.metrics.cluster import homogeneity_score
@@ -10,7 +10,7 @@ def calculate_cardio_kmeans_homogeneity_scores(path):
     x_train, y_train = load_data(path + 'data/' + data_set + '/train/')
     x_test, y_test = load_data(path + 'data/' + data_set + '/test/')
 
-    f = open("stats/svd_cardio_kmeans_homogeneity_scores.txt","w+")
+    f = open("stats/grp_cardio_kmeans_homogeneity_scores.txt","w+")
     reduce_kmeans_and_score(1, x_train, y_train, x_test, y_test, f)
     reduce_kmeans_and_score(2, x_train, y_train, x_test, y_test, f)
     reduce_kmeans_and_score(3, x_train, y_train, x_test, y_test, f)
@@ -29,7 +29,7 @@ def calculate_cardio_EM_homogeneity_scores(path):
     x_train, y_train = load_data(path + 'data/' + data_set + '/train/')
     x_test, y_test = load_data(path + 'data/' + data_set + '/test/')
 
-    f = open("stats/svd_cardio_EM_homogeneity_scores.txt","w+")
+    f = open("stats/grp_cardio_EM_homogeneity_scores.txt","w+")
     reduce_EM_and_score(1, x_train, y_train, x_test, y_test, f)
     reduce_EM_and_score(2, x_train, y_train, x_test, y_test, f)
     reduce_EM_and_score(3, x_train, y_train, x_test, y_test, f)
@@ -48,7 +48,7 @@ def calculate_loan_kmeans_homogeneity_scores(path):
     x_train, y_train = load_data(path + 'data/' + data_set + '/train/')
     x_test, y_test = load_data(path + 'data/' + data_set + '/test/')
 
-    f = open("stats/svd_loan_kmeans_homogeneity_scores.txt","w+")
+    f = open("stats/grp_loan_kmeans_homogeneity_scores.txt","w+")
     reduce_kmeans_and_score(1, x_train, y_train, x_test, y_test, f)
     reduce_kmeans_and_score(2, x_train, y_train, x_test, y_test, f)
     reduce_kmeans_and_score(3, x_train, y_train, x_test, y_test, f)
@@ -67,7 +67,7 @@ def calculate_loan_EM_homogeneity_scores(path):
     x_train, y_train = load_data(path + 'data/' + data_set + '/train/')
     x_test, y_test = load_data(path + 'data/' + data_set + '/test/')
 
-    f = open("stats/svd_loan_EM_homogeneity_scores.txt","w+")
+    f = open("stats/grp_loan_EM_homogeneity_scores.txt","w+")
     reduce_EM_and_score(1, x_train, y_train, x_test, y_test, f)
     reduce_EM_and_score(2, x_train, y_train, x_test, y_test, f)
     reduce_EM_and_score(3, x_train, y_train, x_test, y_test, f)
@@ -85,7 +85,7 @@ def reduce_kmeans_and_score(k, x_train, y_train, x_test, y_test, f):
     print('scoring...')
     kmeans = KMeans(n_clusters=k, random_state=0).fit(x_train)
     base_predictions = kmeans.predict(x_test)
-    pca = TruncatedSVD(n_components=k)
+    pca = GaussianRandomProjection(n_components=k)
     pca_x_train = pca.fit_transform(x_train)
     pca_x_test = pca.transform(x_test)
     kmeans = KMeans(n_clusters=k, random_state=0).fit(pca_x_train)
@@ -101,7 +101,7 @@ def reduce_EM_and_score(k, x_train, y_train, x_test, y_test, f):
     print('scoring...')
     kmeans = GaussianMixture(n_components=k, random_state=0).fit(x_train)
     base_predictions = kmeans.predict(x_test)
-    pca = TruncatedSVD(n_components=k)
+    pca = GaussianRandomProjection(n_components=k)
     pca_x_train = pca.fit_transform(x_train)
     pca_x_test = pca.transform(x_test)
     kmeans = GaussianMixture(n_components=k, random_state=0).fit(pca_x_train)
@@ -116,5 +116,5 @@ def reduce_EM_and_score(k, x_train, y_train, x_test, y_test, f):
 if __name__ == "__main__":
     calculate_cardio_kmeans_homogeneity_scores('../')
     calculate_cardio_EM_homogeneity_scores('../')
-    calculate_loan_kmeans_homogeneity_scores('../')
+    # calculate_loan_kmeans_homogeneity_scores('../')
     # calculate_loan_EM_homogeneity_scores('../')
