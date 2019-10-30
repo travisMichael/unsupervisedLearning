@@ -35,7 +35,7 @@ def pre_process_cardio_data(path):
 
     X_train, X_test, y_train, y_test = train_test_split (x, y, test_size=0.2, random_state=44)
 
-    rob_scaler = RobustScaler()
+    rob_scaler = StandardScaler()
 
     X_train_R = rob_scaler.fit_transform(X_train)
     X_test_R = rob_scaler.transform(X_test)
