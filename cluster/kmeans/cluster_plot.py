@@ -19,7 +19,7 @@ def generate_cardio_elbow_plot(path):
 
 
 def generate_loan_elbow_plot(path):
-    k, i, s = load_cluster_stats(path + "loan_stats.txt")
+    k, i, s = load_cluster_stats("loan_stats.txt")
 
     plt = plot_multiple(
         [k],
@@ -59,7 +59,7 @@ def load_cluster_stats(file):
         line = fp.readline()
         while line:
             components = line.split("\t")
-            k_list.append(k)
+            k_list.append(int(components[0]))
             inertia.append(int(components[2]))
             seconds.append(float(components[1]))
             k += 1

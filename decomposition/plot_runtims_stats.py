@@ -26,9 +26,9 @@ def decomposition_runtime_plot_loan(path):
     k_2, s_2 = load_cluster_stats(path + "ica_loan_runtime_stats.txt")
     k_3, s_3 = load_cluster_stats(path + "svd_loan_runtime_stats.txt")
     k_4, s_4 = load_cluster_stats(path + "grp_loan_runtime_stats.txt")
-
+    k = [2, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100]
     plt = plot_multiple(
-        [k, k_2, k_3, k_4],
+        [k, k, k, k],
         [s, s_2, s_3, s_4],
         ["black", "m", "g", "b"],
         ["PCA", "ICA", "SVD", "GRP"]
@@ -39,6 +39,7 @@ def decomposition_runtime_plot_loan(path):
     plt.legend()
     # plt.show()
     plt.savefig("plots/decomposition_runtime_plot_loan.png")
+
 
 def plot_single(x, y, color_list, label_list):
     plt.figure()

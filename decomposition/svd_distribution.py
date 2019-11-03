@@ -35,9 +35,9 @@ def svd_cardio_distribution_plot(path):
     dist_2 = ica_x_train[:, 0][p==index_2].ravel()
     dist_3 = ica_x_train[:, 0][p==index_3].ravel()
 
-    sns.distplot(dist_1, hist=False, rug=True)
-    sns.distplot(dist_2, hist=False, rug=True)
-    sns.distplot(dist_3, hist=False, rug=True)
+    sns.distplot(dist_1, hist=False, rug=True, color='red')
+    sns.distplot(dist_2, hist=False, rug=True, color='blue')
+    sns.distplot(dist_3, hist=False, rug=True, color='orange')
 
     plt.title('Cardio SVD Distribution')
     plt.savefig('plots/cardio_svd_distribution.png')
@@ -90,4 +90,4 @@ def svd_loan_distribution_plot(path):
 
 
 if __name__ == "__main__":
-    svd_loan_distribution_plot('../')
+    svd_cardio_distribution_plot('../')

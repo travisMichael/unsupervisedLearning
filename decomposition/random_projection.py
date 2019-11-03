@@ -83,16 +83,17 @@ def grp_runtime_stats(path, data_set):
 
     f = open("stats/grp_" + data_set + "_runtime_stats.txt","w+")
 
-    time_estimator(GaussianRandomProjection(n_components=1), f, x_train)
     time_estimator(GaussianRandomProjection(n_components=2), f, x_train)
-    time_estimator(GaussianRandomProjection(n_components=3), f, x_train)
-    time_estimator(GaussianRandomProjection(n_components=4), f, x_train)
-    time_estimator(GaussianRandomProjection(n_components=5), f, x_train)
-    time_estimator(GaussianRandomProjection(n_components=6), f, x_train)
-    time_estimator(GaussianRandomProjection(n_components=7), f, x_train)
-    time_estimator(GaussianRandomProjection(n_components=8), f, x_train)
-    time_estimator(GaussianRandomProjection(n_components=9), f, x_train)
     time_estimator(GaussianRandomProjection(n_components=10), f, x_train)
+    time_estimator(GaussianRandomProjection(n_components=20), f, x_train)
+    time_estimator(GaussianRandomProjection(n_components=30), f, x_train)
+    time_estimator(GaussianRandomProjection(n_components=40), f, x_train)
+    time_estimator(GaussianRandomProjection(n_components=50), f, x_train)
+    time_estimator(GaussianRandomProjection(n_components=60), f, x_train)
+    time_estimator(GaussianRandomProjection(n_components=70), f, x_train)
+    time_estimator(GaussianRandomProjection(n_components=80), f, x_train)
+    time_estimator(GaussianRandomProjection(n_components=90), f, x_train)
+    time_estimator(GaussianRandomProjection(n_components=100), f, x_train)
 
     f.close()
 

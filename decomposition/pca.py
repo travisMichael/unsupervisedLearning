@@ -80,16 +80,17 @@ def pca_runtime_stats(path, data_set):
 
     f = open("stats/pca_" + data_set + "_runtime_stats.txt","w+")
 
-    time_estimator(PCA(n_components=1), f, x_train)
     time_estimator(PCA(n_components=2), f, x_train)
-    time_estimator(PCA(n_components=3), f, x_train)
-    time_estimator(PCA(n_components=4), f, x_train)
-    time_estimator(PCA(n_components=5), f, x_train)
-    time_estimator(PCA(n_components=6), f, x_train)
-    time_estimator(PCA(n_components=7), f, x_train)
-    time_estimator(PCA(n_components=8), f, x_train)
-    time_estimator(PCA(n_components=9), f, x_train)
     time_estimator(PCA(n_components=10), f, x_train)
+    time_estimator(PCA(n_components=20), f, x_train)
+    time_estimator(PCA(n_components=30), f, x_train)
+    time_estimator(PCA(n_components=40), f, x_train)
+    time_estimator(PCA(n_components=50), f, x_train)
+    time_estimator(PCA(n_components=60), f, x_train)
+    time_estimator(PCA(n_components=70), f, x_train)
+    time_estimator(PCA(n_components=80), f, x_train)
+    time_estimator(PCA(n_components=90), f, x_train)
+    time_estimator(PCA(n_components=100), f, x_train)
 
     f.close()
 
@@ -156,9 +157,9 @@ def generate_pca_variance(path):
 
 
 if __name__ == "__main__":
-    pca_runtime_stats('../', 'cardio')
+    pca_runtime_stats('../', 'loan')
     # generate_pca_variance('../')
     # generate_cardio_pca_reconstruction_stats('../')
-    # generate_loan_reconstruction_stats('../')
+    # generate_loan_pca_reconstruction_stats('../')
     # pca_cardio_scatter_plot('../')
     # pca_loan_scatter_plot('../')
