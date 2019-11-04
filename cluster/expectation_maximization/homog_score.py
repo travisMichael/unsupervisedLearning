@@ -10,7 +10,7 @@ def calculate_cardio_kmeans_homogeneity_scores(path):
     x_train, y_train = load_data(path + 'data/' + data_set + '/train/')
     x_test, y_test = load_data(path + 'data/' + data_set + '/test/')
 
-    f = open("grp_cardio_kmeans_homogeneity_scores.txt","w+")
+    f = open("base_cardio_kmeans_homogeneity_scores.txt","w+")
     reduce_kmeans_and_score(2, x_train, y_train, x_test, y_test, f)
     reduce_kmeans_and_score(3, x_train, y_train, x_test, y_test, f)
     reduce_kmeans_and_score(4, x_train, y_train, x_test, y_test, f)
@@ -28,7 +28,7 @@ def calculate_cardio_EM_homogeneity_scores(path):
     x_train, y_train = load_data(path + 'data/' + data_set + '/train/')
     x_test, y_test = load_data(path + 'data/' + data_set + '/test/')
 
-    f = open("grp_cardio_EM_homogeneity_scores.txt","w+")
+    f = open("base_cardio_EM_homogeneity_scores.txt","w+")
     reduce_EM_and_score(2, x_train, y_train, x_test, y_test, f)
     reduce_EM_and_score(3, x_train, y_train, x_test, y_test, f)
     reduce_EM_and_score(4, x_train, y_train, x_test, y_test, f)
@@ -46,7 +46,7 @@ def calculate_loan_kmeans_homogeneity_scores(path):
     x_train, y_train = load_data(path + 'data/' + data_set + '/train/')
     x_test, y_test = load_data(path + 'data/' + data_set + '/test/')
 
-    f = open("grp_loan_kmeans_homogeneity_scores.txt","w+")
+    f = open("base_loan_kmeans_homogeneity_scores.txt","w+")
     reduce_kmeans_and_score(2, x_train, y_train, x_test, y_test, f)
     reduce_kmeans_and_score(10, x_train, y_train, x_test, y_test, f)
     reduce_kmeans_and_score(20, x_train, y_train, x_test, y_test, f)
@@ -66,7 +66,7 @@ def calculate_loan_EM_homogeneity_scores(path):
     x_train, y_train = load_data(path + 'data/' + data_set + '/train/')
     x_test, y_test = load_data(path + 'data/' + data_set + '/test/')
 
-    f = open("grp_loan_EM_homogeneity_scores.txt","w+")
+    f = open("base_loan_EM_homogeneity_scores.txt","w+")
     reduce_EM_and_score(2, x_train, y_train, x_test, y_test, f)
     reduce_EM_and_score(10, x_train, y_train, x_test, y_test, f)
     reduce_EM_and_score(20, x_train, y_train, x_test, y_test, f)
@@ -102,7 +102,7 @@ def reduce_EM_and_score(k, x_train, y_train, x_test, y_test, f):
 
 
 if __name__ == "__main__":
-    # calculate_cardio_kmeans_homogeneity_scores('../')
-    # calculate_cardio_EM_homogeneity_scores('../')
-    calculate_loan_kmeans_homogeneity_scores('../../')
-    calculate_loan_EM_homogeneity_scores('../../')
+    calculate_cardio_kmeans_homogeneity_scores('../../')
+    calculate_cardio_EM_homogeneity_scores('../../')
+    # calculate_loan_kmeans_homogeneity_scores('../../')
+    # calculate_loan_EM_homogeneity_scores('../../')

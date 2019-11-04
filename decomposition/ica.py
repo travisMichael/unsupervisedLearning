@@ -101,7 +101,7 @@ def generate_loan_ica_reconstruction_stats(path):
     data_set = 'loan'
     x_train, y_train = load_data(path + 'data/' + data_set + '/train/')
 
-    f = open("ica_loan_ica_reconstruction_stats.txt","w+")
+    f = open("stats/ica_loan_ica_reconstruction_stats.txt","w+")
 
     reconstruct(FastICA(n_components=1), f, x_train)
     reconstruct(FastICA(n_components=2), f, x_train)
@@ -121,7 +121,7 @@ def generate_cardio_ica_reconstruction_stats(path):
     data_set = 'cardio'
     x_train, y_train = load_data(path + 'data/' + data_set + '/train/')
 
-    f = open("ica_cardio_reconstruction_stats.txt","w+")
+    f = open("stats/ica_cardio_reconstruction_stats.txt","w+")
 
     reconstruct(FastICA(n_components=1), f, x_train)
     reconstruct(FastICA(n_components=2), f, x_train)

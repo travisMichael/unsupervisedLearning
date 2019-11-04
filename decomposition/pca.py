@@ -99,7 +99,7 @@ def generate_loan_pca_reconstruction_stats(path):
     data_set = 'loan'
     x_train, y_train = load_data(path + 'data/' + data_set + '/train/')
 
-    f = open("pca_loan_reconstruction_stats.txt","w+")
+    f = open("stats/pca_loan_reconstruction_stats.txt","w+")
 
     reconstruct(PCA(n_components=2), f, x_train)
     reconstruct(PCA(n_components=10), f, x_train)
@@ -120,7 +120,7 @@ def generate_cardio_pca_reconstruction_stats(path):
     data_set = 'cardio'
     x_train, y_train = load_data(path + 'data/' + data_set + '/train/')
 
-    f = open("pca_cardio_reconstruction_stats.txt","w+")
+    f = open("stats/pca_cardio_reconstruction_stats.txt","w+")
 
     reconstruct(PCA(n_components=1), f, x_train)
     reconstruct(PCA(n_components=2), f, x_train)
@@ -136,8 +136,7 @@ def generate_cardio_pca_reconstruction_stats(path):
     f.close()
 
 
-def generate_pca_variance(path):
-    data_set = 'loan'
+def generate_pca_variance(path, data_set):
     x_train, y_train = load_data(path + 'data/' + data_set + '/train/')
 
     pca = PCA(n_components=10)
@@ -146,7 +145,6 @@ def generate_pca_variance(path):
     # plt.hist(pca.explained_variance_, 5, facecolor='black', alpha=0.5)
 
     features = range(pca.n_components_)
-    plt.show()
     plt.bar(features, pca.explained_variance_ratio_, color='black')
     plt.xlabel('PCA features')
     plt.ylabel('variance %')

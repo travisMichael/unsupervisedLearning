@@ -12,7 +12,7 @@ from sklearn.preprocessing import StandardScaler
 from supervised.nn_util import run_decomp_nn, run_cluster_nn
 
 
-def generate_ica_neural_net_runtime_stats(path):
+def generate_decomp_neural_net_runtime_stats(path):
     data_set = 'loan'
     x_train, y_train = load_data(path + 'data/' + data_set + '/train/')
     x_test, y_test = load_data(path + 'data/' + data_set + '/train/')
@@ -76,4 +76,4 @@ def generate_ica_neural_net_runtime_stats(path):
 
 if __name__ == "__main__":
 
-    generate_ica_neural_net_runtime_stats('../')
+    generate_decomp_neural_net_runtime_stats('../')

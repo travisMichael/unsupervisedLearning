@@ -19,7 +19,7 @@ def generate_cardio_elbow_plot(path):
 
 
 def generate_loan_elbow_plot(path):
-    k, i, s = load_cluster_stats("loan_stats.txt")
+    k, i, s = load_cluster_stats(path + "loan_stats.txt")
 
     plt = plot_multiple(
         [k],
