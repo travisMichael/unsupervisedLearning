@@ -76,8 +76,32 @@ def run_k_means_on_cardio_data(path):
     print(centers)
 
 
-def run_benchmark(path):
+def run_cardio_benchmark(path):
     data_set = 'cardio'
+    x_train, y_train = load_data(path + 'data/' + data_set + '/train/')
+    # X, y = load_data(path + 'data/' + data_set + '/train/')
+
+    f = open("cardiovascular_stats.txt","w+")
+    bench_k_means("1", x_train, y_train, 1, f)
+    bench_k_means("2", x_train, y_train, 2, f)
+    bench_k_means("3", x_train, y_train, 3, f)
+    bench_k_means("4", x_train, y_train, 4, f)
+    bench_k_means("5", x_train, y_train, 5, f)
+    bench_k_means("6", x_train, y_train, 6, f)
+    bench_k_means("7", x_train, y_train, 7, f)
+    bench_k_means("8", x_train, y_train, 8, f)
+    bench_k_means("9", x_train, y_train, 9, f)
+    bench_k_means("10", x_train, y_train, 10, f)
+    bench_k_means("11", x_train, y_train, 11, f)
+    bench_k_means("12", x_train, y_train, 12, f)
+    bench_k_means("13", x_train, y_train, 13, f)
+    bench_k_means("14", x_train, y_train, 14, f)
+    bench_k_means("15", x_train, y_train, 15, f)
+    f.close()
+
+
+def run_loan_benchmark(path):
+    data_set = 'loan'
     x_train, y_train = load_data(path + 'data/' + data_set + '/train/')
     # X, y = load_data(path + 'data/' + data_set + '/train/')
 
@@ -127,5 +151,7 @@ def bench_k_means(name, data, labels, k, f):
 
 
 if __name__ == "__main__":
+    run_loan_benchmark('../../')
+    run_cardio_benchmark('../../')
     run_k_means_on_loan_data('../../')
     run_k_means_on_cardio_data('../../')
